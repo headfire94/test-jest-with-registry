@@ -1,17 +1,17 @@
 /* eslint-env jest */
-const sum = require('./sum')
+const { client } = require('./client')
+const { doMath } = require('./do-math')
+
+jest.mock('./client', () => ({
+  client: {
+    sum: (a, b) => a * a * b
+  }
+}))
 
 describe('sum()', () => {
-  test('Given 1 and 2, should sums 3', () => {
-    const given = {
-      a: 1,
-      b: 2
-    }
+  test('should multiply', () => {
+    const actual = doMath()
 
-    const expected = 3
-
-    const actual = sum(given.a, given.b)
-
-    expect(actual).toEqual(expected)
+    expect(actual).toEqual(125)
   })
 })
